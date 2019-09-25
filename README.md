@@ -2,7 +2,7 @@
 # BlockFacts C#/.NET SDK
 Official BlockFacts C#/.NET SDK including Rest and WebSocket API support.
 
-// NuGet link
+[![NuGet version](https://badge.fury.io/nu/BlockFactsSDK.svg)](https://badge.fury.io/nu/BlockFactsSDK)
 
 ## Features
 
