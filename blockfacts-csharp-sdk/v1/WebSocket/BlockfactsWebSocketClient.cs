@@ -8,8 +8,6 @@ using WebSocketSharp;
 
 namespace blockfacts_csharp_sdk.v1.WebSocket
 {
-    //public delegate void ConnectionOpen(object sender, EventArgs e);
-
     public class BlockfactsWebSocketClient : IBlockfactsWebSocketClient
     {
         public WebSocketSharp.WebSocket ws;
