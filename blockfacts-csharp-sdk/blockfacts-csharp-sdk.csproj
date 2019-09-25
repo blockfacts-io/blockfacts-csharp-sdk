@@ -3,6 +3,24 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <RootNamespace>blockfacts_csharp_sdk</RootNamespace>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageId>BlockFactsSDK.Core</PackageId>
+    <Authors>BlockFacts Ltd.</Authors>
+    <Company>BlockFacts Ltd.</Company>
+    <Product>BlockFacts-SDK</Product>
+    <Description>Official BlockFacts C#/.NET Core SDK including Rest and WebSocket API support.</Description>
+    <Copyright>Copyright 2019</Copyright>
+    <PackageLicenseUrl>https://github.com/blockfacts-io/blockfacts-csharp-sdk</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/blockfacts-io/blockfacts-csharp-sdk</PackageProjectUrl>
+    <PackageIconUrl>https://avatars1.githubusercontent.com/u/55279756?s=200</PackageIconUrl>
+    <RepositoryUrl>https://github.com/blockfacts-io/blockfacts-csharp-sdk</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>blockfacts csharp sdk crypto-api api cryptocurrency crypto asset unified api blockchain bitcoin ethereum litecoin</PackageTags>
+    <PackageReleaseNotes>Initial release of the BlockFacts C# SDK.</PackageReleaseNotes>
+    <ApplicationIcon />
+    <OutputType>Library</OutputType>
+    <StartupObject />
+    <AssemblyName>blockfacts-csharp-sdk</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
