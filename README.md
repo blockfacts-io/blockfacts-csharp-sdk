@@ -317,7 +317,7 @@ wsClient.Subscribe(channelObjects); // List<BlockfactsChannelObject> we created 
 If you wish to unsubscribe from certain channels or pairs, you can do so by sending the `unsubscribe` type message.
 
 ```csharp
-wsClient.Ubsubscribe(channelObjects);
+wsClient.Unsubscribe(channelObjects);
 ```
 
 ### Ping
