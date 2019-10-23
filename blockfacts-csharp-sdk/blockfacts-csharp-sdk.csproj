@@ -21,6 +21,7 @@
     <OutputType>Library</OutputType>
     <StartupObject />
     <AssemblyName>blockfacts-csharp-sdk</AssemblyName>
+    <Version>1.0.2</Version>
   </PropertyGroup>
 
   <ItemGroup>
