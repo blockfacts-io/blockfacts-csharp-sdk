@@ -14,7 +14,7 @@ namespace blockfacts_csharp_sdk.v1.Models
         public double high { get; set; }
         public double open { get; set; }
         public double close { get; set; }
-        public double tradesCount { get; set; }
+        public long tradesCount { get; set; }
         public long timestamp { get; set; }
         public DateTime date { get; set; }
     }
