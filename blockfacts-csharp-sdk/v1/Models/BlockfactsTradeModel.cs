@@ -10,6 +10,7 @@ namespace blockfacts_csharp_sdk.v1.Models
         public string pair { get; set; }
         public double price { get; set; }
         public double tradeSize { get; set; }
+        public double denominatorSize { get; set; }
         public string makerTaker { get; set; }
         public string tradeId { get; set; }
         public string exchangeTime { get; set; }
