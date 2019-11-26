@@ -20,7 +20,7 @@ namespace blockfacts_csharp_sdk.v1.REST
         Task<BlockfactsHistoricalNormalizationResultsModel> GetHistoricalData(string asset, string denominator, string date, string time, int interval, int page);
         Task<BlockfactsNormalizationModel> GetSpecificHistoricalData(string asset, string denominator, string date, string time);
         Task<List<BlockfactsRunningNormalizationPairsTradesModel>> GetNormalizationPairs();
-        Task<List<BlockfactsEndOfDayModel>> GetEndOfDayData(string asset, string denominator, int length);
+        Task<List<BlockfactsOHLCModel>> GetEndOfDayData(string asset, string denominator, int length);
     }
 
     public interface IExchangeEndpoints
@@ -30,6 +30,6 @@ namespace blockfacts_csharp_sdk.v1.REST
         Task<JObject> GetCurrentTradeData(string assets, string denominators, string exchanges);
         Task<BlockfactsHistoricalExchangeTradesModel> GetHistoricalTradeData(string asset, string denominator, string exchanges, string date, string time, int interval, int page);
         Task<List<BlockfactsTradeModel>> GetSpecificTradeData(string asset, string denominator, string exchanges, string date, string time);
-        Task<List<BlockfactsEndOfDayModel>> GetEndOfDayData(string asset, string denominator, string exchange, int length);
+        Task<List<BlockfactsOHLCModel>> GetEndOfDayData(string asset, string denominator, string exchange, int length);
     }
 }

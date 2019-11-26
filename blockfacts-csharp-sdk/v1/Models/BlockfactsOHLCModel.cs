@@ -4,7 +4,7 @@ using System.Text;
 
 namespace blockfacts_csharp_sdk.v1.Models
 {
-    public class BlockfactsEndOfDayModel
+    public class BlockfactsOHLCModel
     {
         public string exchange { get; set; }
         public string pair { get; set; }
@@ -16,6 +16,9 @@ namespace blockfacts_csharp_sdk.v1.Models
         public double close { get; set; }
         public long tradesCount { get; set; }
         public long timestamp { get; set; }
+        public long exchangeOpenTime { get; set; }
+        public long exchangeCloseTime { get; set; }
+        public string interval { get; set; }
         public DateTime date { get; set; }
     }
 }

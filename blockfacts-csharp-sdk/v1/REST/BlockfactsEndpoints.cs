@@ -114,11 +114,11 @@ namespace blockfacts_csharp_sdk.v1.REST
         /// <param name="denominator">Denominator ticker (e.g. USD)</param>
         /// <param name="length">Length (representing how many days back from the current day, Min = 0, Max = 20)</param>
         /// <returns>List<BlockfactsEndOfDayModel></returns>
-        public async Task<List<BlockfactsEndOfDayModel>> GetEndOfDayData(string asset, string denominator, int length)
+        public async Task<List<BlockfactsOHLCModel>> GetEndOfDayData(string asset, string denominator, int length)
         {
             restClient.BaseUrl = new Uri(this.blockfactsApiUrl + "/api/v1/blockfacts/price/endOfDay?asset=" + asset + "&denominator=" + denominator + "&length=" + length.ToString());
             var response = await restClient.ExecuteTaskAsync(restRequest);
-            var data = JsonConvert.DeserializeObject<List<BlockfactsEndOfDayModel>>(response.Content);
+            var data = JsonConvert.DeserializeObject<List<BlockfactsOHLCModel>>(response.Content);
             return data;
         }
     }

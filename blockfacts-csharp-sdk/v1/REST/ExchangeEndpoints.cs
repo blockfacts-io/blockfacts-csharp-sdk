@@ -121,11 +121,11 @@ namespace blockfacts_csharp_sdk.v1.REST
         /// <param name="exchange">Exchange name (e.g. KRAKEN)</param>
         /// <param name="length">Length (representing how many days back from the current day, Min = 0, Max = 20)</param>
         /// <returns>List<BlockfactsEndOfDayModel></returns>
-        public async Task<List<BlockfactsEndOfDayModel>> GetEndOfDayData(string asset, string denominator, string exchange, int length)
+        public async Task<List<BlockfactsOHLCModel>> GetEndOfDayData(string asset, string denominator, string exchange, int length)
         {
             restClient.BaseUrl = new Uri(this.blockfactsApiUrl + "/api/v1/exchanges/trades/endOfDay?asset=" + asset + "&denominator=" + denominator + "&exchange=" + exchange + "&length=" + length.ToString());
             var response = await restClient.ExecuteTaskAsync(restRequest);
-            var data = JsonConvert.DeserializeObject<List<BlockfactsEndOfDayModel>>(response.Content);
+            var data = JsonConvert.DeserializeObject<List<BlockfactsOHLCModel>>(response.Content);
             return data;
         }
     }
