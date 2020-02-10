@@ -71,6 +71,26 @@ namespace blockfacts_csharp_sdk.v1.REST
         }
 
         /// <summary>
+        /// Gets 20 latest trades that happened on the requested exchanges and pairs.
+        /// Reference: https://docs.blockfacts.io/?csharp#snapshot-trade-data
+        /// </summary>
+        /// <param name="assets">Asset tickers (e.g. BTC, ETH)</param>
+        /// <param name="denominators">Denominator tickers (e.g. USD, EUR)</param>
+        /// <param name="exchanges">Exchange names (e.g. KRAKEN, COINBASE)</param>
+        /// <returns></returns>
+        public async Task<JObject> GetSnapshotTradeData(string assets, string denominators, string exchanges)
+        {
+            assets = assets.Trim().Replace(" ", "");
+            denominators = denominators.Trim().Replace(" ", "");
+            exchanges = exchanges.Trim().Replace(" ", "");
+
+            restClient.BaseUrl = new Uri(this.blockfactsApiUrl + "/api/v1/exchanges/trades/snapshot?asset=" + assets + "&denominator=" + denominators + "&exchange=" + exchanges);
+            var response = await restClient.ExecuteTaskAsync(restRequest);
+            var data = JObject.Parse(response.Content);
+            return data;
+        }
+
+        /// <summary>
         /// Gets exchange historical price by asset-denominator, exchange, date, time and interval.
         /// Reference: https://docs.blockfacts.io/?csharp#historical-trade-data
         /// </summary>

@@ -15,7 +15,7 @@ namespace blockfacts_csharp_sdk.v1.WebSocket
         void OnMessage(EventHandler<MessageEventArgs> onMessageHandler);
         void OnClose(EventHandler<CloseEventArgs> onCloseHandler);
         void OnError(EventHandler<ErrorEventArgs> onErrorHandler);
-        void Subscribe(List<BlockfactsChannelObject> channels);
+        void Subscribe(List<BlockfactsChannelObject> channels, bool snapshot, string id);
         void Unsubscribe(List<BlockfactsChannelObject> channels);
         void Ping();
         void Pong();

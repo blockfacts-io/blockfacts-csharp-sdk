@@ -58,6 +58,24 @@ namespace blockfacts_csharp_sdk.v1.REST
         }
 
         /// <summary>
+        /// Gets last 20 BLOCKFACTS normalized prices for provided asset-denominator pairs.
+        /// Reference: https://docs.blockfacts.io/?csharp#data-snapshot
+        /// </summary>
+        /// <param name="assets">Asset tickers (e.g. BTC, ETH)</param>
+        /// <param name="denominators">Denominator tickers (e.g. USD, EUR)</param>
+        /// <returns></returns>
+        public async Task<JObject> GetSnapshotData(string assets, string denominators)
+        {
+            assets = assets.Trim().Replace(" ", "");
+            denominators = denominators.Trim().Replace(" ", "");
+
+            restClient.BaseUrl = new Uri(this.blockfactsApiUrl + "/api/v1/blockfacts/price/snapshot?asset=" + assets + "&denominator=" + denominators);
+            var response = await restClient.ExecuteTaskAsync(restRequest);
+            var data = JObject.Parse(response.Content);
+            return data;
+        }
+
+        /// <summary>
         /// Gets historical normalization data by asset-denominator, date, time and interval.
         /// Reference: https://docs.blockfacts.io/?csharp#historical-data
         /// </summary>

@@ -7,6 +7,8 @@ namespace blockfacts_csharp_sdk.v1.Models
     public class BlockfactsSubscribeMessage
     {
         public string type { get; set; }
+        public bool snapshot { get; set; }
+        public string id { get; set; }
         public string X_API_KEY { get; set; }
         public string X_API_SECRET { get; set; }
         public List<BlockfactsChannelObject> channels { get; set; }

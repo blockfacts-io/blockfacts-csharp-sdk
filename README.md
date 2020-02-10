@@ -52,7 +52,7 @@ Also many methods return Blockfacts models, just so you don't have to map the JS
 
 ### List all assets
 Get all assets that we support.
-- [`List<BlockfactsAssetModel> ListAllAssets()`](https://docs.blockfacts.io/#list-all-assets)
+- [`List<BlockfactsAssetModel> ListAllAssets()`](https://docs.blockfacts.io/?csharp#list-all-assets)
 
 ```csharp
 var response = await restClient.Assets.ListAllAssets();
@@ -64,7 +64,7 @@ var response = restClient.Assets.ListAllAssets().Result;
 
 ### Get specific asset
 Get specific asset by ticker ID.
-- [`BlockfactsAssetModel GetSpecificAsset(string tickerId)`](https://docs.blockfacts.io/#specific-asset)
+- [`BlockfactsAssetModel GetSpecificAsset(string tickerId)`](https://docs.blockfacts.io/?csharp#specific-asset)
 
 ```csharp
 var response = await restClient.Assets.GetSpecificAsset("BTC");
@@ -78,7 +78,7 @@ var response = restClient.Assets.GetSpecificAsset("BTC").Result;
 
 ### Exchanges in normalization
 List exchanges that go into the normalization for specific asset-denominator pair.
-- [`JObject GetExchangesInNormalization(string pairs)`](https://docs.blockfacts.io/#exchanges-in-normalization)
+- [`JObject GetExchangesInNormalization(string pairs)`](https://docs.blockfacts.io/?csharp#exchanges-in-normalization)
 
 ```csharp
 var response = await restClient.Blockfacts.GetExchangesInNormalization("BTC-USD, ETH-USD, BTC-GBP");
@@ -92,7 +92,7 @@ Console.WriteLine(response["ETH-USD"]["asset"]);
 
 ### Current data
 Get current normalization data for specific asset-denominator pair.
-- [`JObject GetCurrentData(string assets, string denominators)`](https://docs.blockfacts.io/#current-data)
+- [`JObject GetCurrentData(string assets, string denominators)`](https://docs.blockfacts.io/?csharp#current-data)
 
 ```csharp
 var response = await restClient.Blockfacts.GetCurrentData("BTC, ETH", "USD, GBP");
@@ -104,9 +104,23 @@ var response = restClient.Blockfacts.GetCurrentData("BTC, ETH", "USD, GBP").Resu
 Console.WriteLine(response["BTC-USD"]);
 ```
 
+### Snapshot data
+Get last 20 BLOCKFACTS normalized prices for provided asset-denominator pairs.
+- [`JObject GetSnapshotData(string assets, string denominators)`](https://docs.blockfacts.io/?csharp#data-snapshot)
+
+```csharp
+var response = await restClient.Blockfacts.GetSnapshotData("BTC, ETH", "USD, GBP");
+
+// OR
+
+var response = restClient.Blockfacts.GetSnapshotData("BTC, ETH", "USD, GBP").Result;
+
+Console.WriteLine(response["BLOCKFACTS"]["BTC-USD"]);
+```
+
 ### Historical data
 Get historical normalization data by asset-denominator, date, time and interval.
-- [`BlockfactsHistoricalNormalizationResultsModel GetHistoricalData(string asset, string denominator, string date, string time, int interval, int page)`](https://docs.blockfacts.io/#historical-data)
+- [`BlockfactsHistoricalNormalizationResultsModel GetHistoricalData(string asset, string denominator, string date, string time, int interval, int page)`](https://docs.blockfacts.io/?csharp#historical-data)
 
 ```csharp
 var response = await restClient.Blockfacts.GetHistoricalData("BTC", "USD", "2.9.2019", "14:00:00", 20, 1);
@@ -118,7 +132,7 @@ var response = restClient.Blockfacts.GetHistoricalData("BTC", "USD", "2.9.2019",
 
 ### Specific historical data
 Get historical normalized price by specific point in time.
-- [`BlockfactsNormalizationModel GetSpecificHistoricalData(string asset, string denominator, string date, string time)`](https://docs.blockfacts.io/#specific-historical-data)
+- [`BlockfactsNormalizationModel GetSpecificHistoricalData(string asset, string denominator, string date, string time)`](https://docs.blockfacts.io/?csharp#specific-historical-data)
 
 ```csharp
 var response = await restClient.Blockfacts.GetSpecificHistoricalData("BTC", "USD", "12.9.2019", "14:00:00");
@@ -130,7 +144,7 @@ var response = restClient.Blockfacts.GetSpecificHistoricalData("BTC", "USD", "12
 
 ### Normalization pairs
 Get all running normalization pairs. Resulting in which asset-denominator pairs are currently being normalized inside our internal system.
-- [`List<BlockfactsRunningNormalizationPairsTradesModel> GetNormalizationPairs()`](https://docs.blockfacts.io/#normalization-pairs)
+- [`List<BlockfactsRunningNormalizationPairsTradesModel> GetNormalizationPairs()`](https://docs.blockfacts.io/?csharp#normalization-pairs)
 
 ```csharp
 var response = await restClient.Blockfacts.GetNormalizationPairs();
@@ -142,7 +156,7 @@ var response = restClient.Blockfacts.GetNormalizationPairs().Result;
 
 ### End of day data
 Get normalized end of day data for specific asset-denominator.
-- [`List<BlockfactsEndOfDayModel> GetEndOfDayData(string asset, string denominator, int length)`](https://docs.blockfacts.io/#end-of-day-data)
+- [`List<BlockfactsEndOfDayModel> GetEndOfDayData(string asset, string denominator, int length)`](https://docs.blockfacts.io/?csharp#end-of-day-data)
 
 ```csharp
 var response = await restClient.Blockfacts.GetEndOfDayData("BTC", "USD", 2);
@@ -156,7 +170,7 @@ var response = restClient.Blockfacts.GetEndOfDayData("BTC", "USD", 2).Result;
 
 ### List all exchanges
 List all exchanges that we support.
-- [`List<BlockfactsExchangeDataModel>> ListAllExchanges()`](https://docs.blockfacts.io/#all-exchanges)
+- [`List<BlockfactsExchangeDataModel>> ListAllExchanges()`](https://docs.blockfacts.io/?csharp#all-exchanges)
 
 ```csharp
 var response = await restClient.Exchanges.ListAllExchanges();
@@ -168,7 +182,7 @@ var response = restClient.Exchanges.ListAllExchanges().Result;
 
 ### Specific exchange data
 Get information about a specific exchange by its name. Returns information such as which assets are supported, asset ticker info, etc.
-- [`BlockfactsExchangeDataModel GetSpecificExchangeData(string exchange)`](https://docs.blockfacts.io/#specific-exchange-data)
+- [`BlockfactsExchangeDataModel GetSpecificExchangeData(string exchange)`](https://docs.blockfacts.io/?csharp#specific-exchange-data)
 
 ```csharp
 var response = await restClient.Exchanges.GetSpecificExchangeData("KRAKEN");
@@ -180,7 +194,7 @@ var response = restClient.Exchanges.GetSpecificExchangeData("KRAKEN").Result;
 
 ### Current trade data
 Get current trade data for specific asset-denominator pair, from specific exchange(s).
-- [`JObject GetCurrentTradeData(string assets, string denominators, string exchanges)`](https://docs.blockfacts.io/#current-trade-data)
+- [`JObject GetCurrentTradeData(string assets, string denominators, string exchanges)`](https://docs.blockfacts.io/?csharp#current-trade-data)
 
 ```csharp
 var response = await restClient.Exchanges.GetCurrentTradeData("BTC, ETH", "USD, GBP", "COINBASE, KRAKEN");
@@ -192,9 +206,23 @@ var response = restClient.Exchanges.GetCurrentTradeData("BTC, ETH", "USD, GBP", 
 Console.WriteLine(response["BTC-USD"][0]["pair"]);
 ```
 
+### Snapshot trade data
+Get 20 latest trades that happened on the requested exchanges and pairs.
+- [`JObject GetSnapshotTradeData(string assets, string denominators, string exchanges)`](https://docs.blockfacts.io/?csharp#snapshot-trade-data)
+
+```csharp
+var response = await restClient.Exchanges.GetSnapshotTradeData("BTC, ETH", "USD, GBP", "COINBASE, KRAKEN");
+
+// OR
+
+var response = restClient.Exchanges.GetSnapshotTradeData("BTC, ETH", "USD, GBP", "COINBASE, KRAKEN").Result;
+
+Console.WriteLine(response["KRAKEN"]["BTC-USD"][0]["pair"]);
+```
+
 ### Historical trade data
 Get exchange historical price by asset-denominator, exchange, date, time and interval.
-- [`BlockfactsHistoricalExchangeTradesModel GetHistoricalTradeData(string asset, string denominator, string exchanges, string date, string time, int interval, int page)`](https://docs.blockfacts.io/#historical-trade-data)
+- [`BlockfactsHistoricalExchangeTradesModel GetHistoricalTradeData(string asset, string denominator, string exchanges, string date, string time, int interval, int page)`](https://docs.blockfacts.io/?csharp#historical-trade-data)
 
 ```csharp
 var response = await restClient.Exchanges.GetHistoricalTradeData("BTC", "USD", "KRAKEN, COINBASE", "2.9.2019", "14:00:00", 1);
@@ -206,7 +234,7 @@ var response = restClient.Exchanges.GetHistoricalTradeData("BTC", "USD", "KRAKEN
 
 ### Specific trade data
 Get historical exchange trades in specific second.
-- [`List<BlockfactsTradeModel> GetSpecificTradeData(string asset, string denominator, string exchanges, string date, string time)`](https://docs.blockfacts.io/#specific-trade-data)
+- [`List<BlockfactsTradeModel> GetSpecificTradeData(string asset, string denominator, string exchanges, string date, string time)`](https://docs.blockfacts.io/?csharp#specific-trade-data)
 
 ```csharp
 var response = await restClient.Exchanges.GetSpecificTradeData("BTC", "USD", "KRAKEN, COINBASE", "2.9.2019", "14:00:00");
@@ -217,8 +245,8 @@ var response = restClient.Exchanges.GetSpecificTradeData("BTC", "USD", "KRAKEN, 
 ```
 
 ### End of day data
-Get exchange end of day data for specific asset-denominator and exchange
-- [`List<BlockfactsEndOfDayModel> GetEndOfDayData(string asset, string denominator, string exchange, int length)`](https://docs.blockfacts.io/#end-of-day-data-2)
+Get exchange end of day data for specific asset-denominator and exchange.
+- [`List<BlockfactsEndOfDayModel> GetEndOfDayData(string asset, string denominator, string exchange, int length)`](https://docs.blockfacts.io/?csharp#end-of-day-data-2)
 
 ```csharp
 var response = await restClient.Exchanges.GetEndOfDayData("BTC", "USD", "KRAKEN", 1);
@@ -264,9 +292,17 @@ private static void OnMessage(object sender, MessageEventArgs e)
     var json = JsonConvert.DeserializeObject<dynamic>(e.Data);
     Console.WriteLine(json);
 
+    if(json.type == "subscribed") {
+        // Handle subscribed
+    }
+
     if (json.type == "ping")
     {
         // Send Pong message
+    }
+
+    if (json.type == "snapshot") {
+        // Handle snapshot
     }
 
     if (json.type == "blockfactsPrice")
@@ -307,10 +343,16 @@ private static void OnError(object sender, ErrorEventArgs e)
 ```
 
 ### Subscribing
-In order to subscribe to a specific channel or asset-pair you must send out a `subscribe` type message. Our SDK allows you to do just that with the following code example: 
+In order to subscribe to a specific channel or asset-pair you must send out a `subscribe` type message. Our SDK allows you to do just that with the following code example:
+
+We must pass 3 fields to `Subscribe` function: `channelObjects` list, `snapshot` and `id`.
+
+`Snapshot` field is boolean and if we provide true for it, the first message we will receive, will be the last 20 trades which happened on provided channelObjects.
+
+`Id` field represents the clearer way of message recognition. In example where you open multiple WebSocket connections in order to communicate with the server, the `Id` field will help you recognize the messages easier.
 
 ```csharp
-wsClient.Subscribe(channelObjects); // List<BlockfactsChannelObject> we created earlier
+wsClient.Subscribe(channelObjects, true, "123");
 ```
 
 ### Unsubscribing

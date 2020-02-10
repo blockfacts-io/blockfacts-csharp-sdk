@@ -68,11 +68,13 @@ namespace blockfacts_csharp_sdk.v1.WebSocket
         /// Subscribe method used for subscribing to BlockFacts real-time crypto data stream.
         /// </summary>
         /// <param name="channels">List of BlockfactsChannelObjects to subscribe to</param>
-        public void Subscribe(List<BlockfactsChannelObject> channels)
+        public void Subscribe(List<BlockfactsChannelObject> channels, bool snapshot = false, string id = "")
         {
             BlockfactsSubscribeMessage subscribeMessage = new BlockfactsSubscribeMessage();
 
             subscribeMessage.type = "subscribe";
+            subscribeMessage.snapshot = snapshot;
+            subscribeMessage.id = id == null ? "" : id;
             subscribeMessage.X_API_KEY = this.ApiKey;
             subscribeMessage.X_API_SECRET = this.ApiSecret;
             subscribeMessage.channels = channels;
