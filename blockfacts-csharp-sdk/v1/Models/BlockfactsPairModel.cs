@@ -11,7 +11,8 @@ namespace blockfacts_csharp_sdk.v1.Models
         public string tickerId { get; set; }
         public string blockfactsPair { get; set; }
         public string assetName { get; set; }
-        public int isCrypto { get; set; }
+        public bool active { get; set; }
+        public string type { get; set; }
         public string denominatorName { get; set; }
         public string blockfactsDenominator { get; set; }
     }

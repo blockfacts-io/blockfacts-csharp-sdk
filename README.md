@@ -105,7 +105,7 @@ Console.WriteLine(response["BTC-USD"]);
 ```
 
 ### Snapshot data
-Get last 20 BLOCKFACTS normalized prices for provided asset-denominator pairs.
+Get last 600 BLOCKFACTS normalized prices for provided asset-denominator pairs.
 - [`JObject GetSnapshotData(string assets, string denominators)`](https://docs.blockfacts.io/?csharp#data-snapshot)
 
 ```csharp
@@ -207,7 +207,7 @@ Console.WriteLine(response["BTC-USD"][0]["pair"]);
 ```
 
 ### Snapshot trade data
-Get 20 latest trades that happened on the requested exchanges and pairs.
+Get 600 latest trades that happened on the requested exchanges and pairs.
 - [`JObject GetSnapshotTradeData(string assets, string denominators, string exchanges)`](https://docs.blockfacts.io/?csharp#snapshot-trade-data)
 
 ```csharp
@@ -347,7 +347,7 @@ In order to subscribe to a specific channel or asset-pair you must send out a `s
 
 We must pass 3 fields to `Subscribe` function: `channelObjects` list, `snapshot` and `id`.
 
-`Snapshot` field is boolean and if we provide true for it, the first message we will receive, will be the last 20 trades which happened on provided channelObjects.
+`Snapshot` field is boolean and if we provide true for it, the first message we will receive, will be the last 600 trades which happened on provided channelObjects.
 
 `Id` field represents the clearer way of message recognition. In example where you open multiple WebSocket connections in order to communicate with the server, the `Id` field will help you recognize the messages easier.
 

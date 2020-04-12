@@ -7,6 +7,7 @@ namespace blockfacts_csharp_sdk.v1.Models
     public class BlockfactsExchangeDataModel
     {
         public string exchange { get; set; }
+        public string logo { get; set; }
         public List<BlockfactsPairModel> pairs { get; set; }
     }
 }

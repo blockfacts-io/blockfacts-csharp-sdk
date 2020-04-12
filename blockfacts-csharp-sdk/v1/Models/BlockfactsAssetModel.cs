@@ -8,6 +8,6 @@ namespace blockfacts_csharp_sdk.v1.Models
     {
         public string Asset { get; set; }
         public string BlockfactsTicker { get; set; }
-        public int isCrypto { get; set; }
+        public string Type { get; set; }
     }
 }
