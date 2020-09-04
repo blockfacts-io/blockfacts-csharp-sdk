@@ -21,7 +21,8 @@ namespace blockfacts_csharp_sdk.v1.REST
         Task<BlockfactsHistoricalNormalizationResultsModel> GetHistoricalData(string asset, string denominator, string date, string time, int interval, int page);
         Task<BlockfactsNormalizationModel> GetSpecificHistoricalData(string asset, string denominator, string date, string time);
         Task<List<BlockfactsRunningNormalizationPairsTradesModel>> GetNormalizationPairs();
-        Task<List<BlockfactsOHLCModel>> GetEndOfDayData(string asset, string denominator, int length);
+        Task<JObject> GetHistoricalOHLCVData(string asset, string denominator, string interval, string dateStart, string timeStart, string dateEnd, string timeEnd, int page);
+        Task<JArray> GetPeriodMovers(string denominator, string date, string interval, int sort);
     }
 
     public interface IExchangeEndpoints
@@ -32,6 +33,9 @@ namespace blockfacts_csharp_sdk.v1.REST
         Task<JObject> GetSnapshotTradeData(string assets, string denominators, string exchanges);
         Task<BlockfactsHistoricalExchangeTradesModel> GetHistoricalTradeData(string asset, string denominator, string exchanges, string date, string time, int interval, int page);
         Task<List<BlockfactsTradeModel>> GetSpecificTradeData(string asset, string denominator, string exchanges, string date, string time);
-        Task<List<BlockfactsOHLCModel>> GetEndOfDayData(string asset, string denominator, string exchange, int length);
+        Task<JObject> GetPairInfo(string exchange, string pair);
+        Task<JObject> GetHistoricalOHLCVData(string asset, string denominator, string exchanges, string interval, string dateStart, string timeStart, string dateEnd, string timeEnd, int page);
+        Task<JObject> GetTotalTradeVolume(string asset, string denominator, string interval);
+        Task<JArray> GetPeriodMovers(string exchange, string denominator, string date, string interval, int sort);
     }
 }

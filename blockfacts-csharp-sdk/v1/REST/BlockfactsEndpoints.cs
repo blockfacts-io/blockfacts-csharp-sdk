@@ -58,7 +58,7 @@ namespace blockfacts_csharp_sdk.v1.REST
         }
 
         /// <summary>
-        /// Gets last 20 BLOCKFACTS normalized prices for provided asset-denominator pairs.
+        /// Gets last 600 BLOCKFACTS normalized prices for provided asset-denominator pairs.
         /// Reference: https://docs.blockfacts.io/?csharp#data-snapshot
         /// </summary>
         /// <param name="assets">Asset tickers (e.g. BTC, ETH)</param>
@@ -70,6 +70,26 @@ namespace blockfacts_csharp_sdk.v1.REST
             denominators = denominators.Trim().Replace(" ", "");
 
             restClient.BaseUrl = new Uri(this.blockfactsApiUrl + "/api/v1/blockfacts/price/snapshot?asset=" + assets + "&denominator=" + denominators);
+            var response = await restClient.ExecuteTaskAsync(restRequest);
+            var data = JObject.Parse(response.Content);
+            return data;
+        }
+
+        /// <summary>
+        /// Gets the snapshot of Blockfacts OHLCV data for provided asset-denominator pairs and intervals.
+        /// Reference: https://docs.blockfacts.io/?csharp#data-snapshot-ohlcv-blockfacts
+        /// </summary>
+        /// <param name="assets">Asset tickers (e.g. BTC, ETH)</param>
+        /// <param name="denominators">Denominator tickers (e.g. USD, EUR)</param>
+        /// <param name="intervals">Intervals (e.g. 1m, 3m, 1h)</param>
+        /// <returns></returns>
+        public async Task<JObject> GetOHLCVSnapshotData(string assets, string denominators, string intervals)
+        {
+            assets = assets.Trim().Replace(" ", "");
+            denominators = denominators.Trim().Replace(" ", "");
+            intervals = intervals.Trim().Replace(" ", "");
+
+            restClient.BaseUrl = new Uri(this.blockfactsApiUrl + "/api/v1/blockfacts/price/ohlcv-snapshot?asset=" + assets + "&denominator=" + denominators + "&interval=" + intervals);
             var response = await restClient.ExecuteTaskAsync(restRequest);
             var data = JObject.Parse(response.Content);
             return data;
@@ -91,6 +111,27 @@ namespace blockfacts_csharp_sdk.v1.REST
             restClient.BaseUrl = new Uri(this.blockfactsApiUrl + "/api/v1/blockfacts/price/historical?asset=" + asset + "&denominator=" + denominator + "&date=" + date + "&time=" + time + "&interval=" + interval.ToString() + "&page=" + page.ToString());
             var response = await restClient.ExecuteTaskAsync(restRequest);
             var data = JsonConvert.DeserializeObject<BlockfactsHistoricalNormalizationResultsModel>(response.Content);
+            return data;
+        }
+
+        /// <summary>
+        /// Gets historical OHLCV data by asset-denominator, date, time and interval.
+        /// Reference: https://docs.blockfacts.io/?csharp#ohlcv-historical-data
+        /// </summary>
+        /// <param name="asset">Asset ticker (e.g. BTC)</param>
+        /// <param name="denominator">Denominator ticker (e.g. USD)</param>
+        /// <param name="interval">OHLCV Interval (30s, 1m, 3m, 5m, 15m, 30m, 1h, 2h, 4h, 6h, 12h, 1d, 1w, 1mo)</param>
+        /// <param name="dateStart">Specific date to start from (e.g. 5.8.2020)</param>
+        /// <param name="timeStart">Specific time to start from (in UTC) (e.g. 14:00:00)</param>
+        /// <param name="dateEnd">Specific end date (e.g. 5.8.2020)</param>
+        /// <param name="timeEnd">Specific end time (in UTC) (e.g. 14:00:00)</param>
+        /// <param name="page">Optional, our API is always showing 100 results per page in order to improve the performance. You can provide the page parameter in order to query a specific page</param>
+        /// <returns>Jobject</returns>
+        public async Task<JObject> GetHistoricalOHLCVData(string asset, string denominator, string interval, string dateStart, string timeStart, string dateEnd, string timeEnd, int page = 1)
+        {
+            restClient.BaseUrl = new Uri(this.blockfactsApiUrl + "/api/v1/blockfacts/ohlcv?asset=" + asset + "&denominator=" + denominator + "&interval=" + interval + "&dateStart=" + dateStart + "&timeStart=" + timeStart + "&dateEnd=" + dateEnd + "&timeEnd=" + timeEnd + "&page=" + page.ToString());
+            var response = await restClient.ExecuteTaskAsync(restRequest);
+            var data = JsonConvert.DeserializeObject<JObject>(response.Content);
             return data;
         }
 
@@ -125,18 +166,19 @@ namespace blockfacts_csharp_sdk.v1.REST
         }
 
         /// <summary>
-        /// Get normalized end of day data for specific asset-denominator.
-        /// Reference: https://docs.blockfacts.io/?csharp#end-of-day-data
+        /// Gets the moving percentage, and difference in price over a certain time period.
+        /// Reference: https://docs.blockfacts.io/?csharp#period-movers
         /// </summary>
-        /// <param name="asset">Asset ticker (e.g. BTC)</param>
         /// <param name="denominator">Denominator ticker (e.g. USD)</param>
-        /// <param name="length">Length (representing how many days back from the current day, Min = 0, Max = 20)</param>
-        /// <returns>List<BlockfactsEndOfDayModel></returns>
-        public async Task<List<BlockfactsOHLCModel>> GetEndOfDayData(string asset, string denominator, int length)
+        /// <param name="date">Specific date (e.g. 11.8.2020)</param>
+        /// <param name="interval">Interval (oneDay, sevenDay, thirtyDay, ninetyDay, oneYear, twoYear, threeYear, fiveYear)</param>
+        /// <param name="sort">1 - Losers first, -1 - Winners first</param>
+        /// <returns>JArray</returns>
+        public async Task<JArray> GetPeriodMovers(string denominator, string date, string interval, int sort)
         {
-            restClient.BaseUrl = new Uri(this.blockfactsApiUrl + "/api/v1/blockfacts/price/endOfDay?asset=" + asset + "&denominator=" + denominator + "&length=" + length.ToString());
+            restClient.BaseUrl = new Uri(this.blockfactsApiUrl + "/api/v1/blockfacts/period-movers?denominator=" + denominator + "&date=" + date + "&interval=" + interval + "&sort=" + sort );
             var response = await restClient.ExecuteTaskAsync(restRequest);
-            var data = JsonConvert.DeserializeObject<List<BlockfactsOHLCModel>>(response.Content);
+            var data = JsonConvert.DeserializeObject<JArray>(response.Content);
             return data;
         }
     }

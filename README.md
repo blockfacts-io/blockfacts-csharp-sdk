@@ -118,6 +118,21 @@ var response = restClient.Blockfacts.GetSnapshotData("BTC, ETH", "USD, GBP").Res
 Console.WriteLine(response["BLOCKFACTS"]["BTC-USD"]);
 ```
 
+### OHLCV Snapshot data
+Get the snapshot of Blockfacts OHLCV data for provided asset-denominator pairs and intervals.
+- [`JObject GetOHLCVSnapshotData(string assets, string denominators, string intervals)`](https://docs.blockfacts.io/?csharp#data-snapshot-ohlcv-blockfacts)
+
+```csharp
+var response = await restClient.Blockfacts.GetOHLCVSnapshotData("BTC, ETH", "USD, GBP", "1m, 3m, 1h");
+
+// OR
+
+var response = restClient.Blockfacts.GetOHLCVSnapshotData("BTC, ETH", "USD, GBP", "1m, 3m, 1h").Result;
+
+Console.WriteLine(response["BLOCKFACTS"]["BTC-USD"]["1m"]);
+```
+**Note:** You can find all supported intervals on our official documentation here: https://docs.blockfacts.io/?csharp#data-snapshot-ohlcv-blockfacts
+
 ### Historical data
 Get historical normalization data by asset-denominator, date, time and interval.
 - [`BlockfactsHistoricalNormalizationResultsModel GetHistoricalData(string asset, string denominator, string date, string time, int interval, int page)`](https://docs.blockfacts.io/?csharp#historical-data)
@@ -128,6 +143,18 @@ var response = await restClient.Blockfacts.GetHistoricalData("BTC", "USD", "2.9.
 // OR
 
 var response = restClient.Blockfacts.GetHistoricalData("BTC", "USD", "2.9.2019", "14:00:00", 20, 1).Result;
+```
+
+### OHLCV Historical data
+Get historical OHLCV data by asset-denominator, date, time and interval.
+- [`JObject GetHistoricalOHLCVData(string asset, string denominator, string interval, string dateStart, string timeStart, string dateEnd, string timeEnd, int page)`](https://docs.blockfacts.io/?csharp#ohlcv-historical-data)
+
+```csharp
+var response = await restClient.Blockfacts.GetHistoricalOHLCVData("BTC", "USD", "1d", "20.5.2020", "11:00:00", "28.5.2020", "11:00:00", 1);
+
+// OR
+
+var response = restClient.Blockfacts.GetHistoricalOHLCVData("BTC", "USD", "1d", "20.5.2020", "11:00:00", "28.5.2020", "11:00:00", 1).Result;
 ```
 
 ### Specific historical data
@@ -154,16 +181,16 @@ var response = await restClient.Blockfacts.GetNormalizationPairs();
 var response = restClient.Blockfacts.GetNormalizationPairs().Result;
 ```
 
-### End of day data
-Get normalized end of day data for specific asset-denominator.
-- [`List<BlockfactsEndOfDayModel> GetEndOfDayData(string asset, string denominator, int length)`](https://docs.blockfacts.io/?csharp#end-of-day-data)
+### Period movers
+Get the moving percentage, and difference in price over a certain time period.
+- [`JArray GetPeriodMovers(string denominator, string date, string interval, int sort)`](https://docs.blockfacts.io/?csharp#period-movers)
 
 ```csharp
-var response = await restClient.Blockfacts.GetEndOfDayData("BTC", "USD", 2);
+var response = await restClient.Blockfacts.GetPeriodMovers("USD", "11.8.2020", "sevenDay", -1);
 
 // OR
 
-var response = restClient.Blockfacts.GetEndOfDayData("BTC", "USD", 2).Result;
+var response = restClient.Blockfacts.GetPeriodMovers("USD", "11.8.2020", "sevenDay", -1).Result;
 ```
 
 ## Exchange endpoints
@@ -190,6 +217,18 @@ var response = await restClient.Exchanges.GetSpecificExchangeData("KRAKEN");
 // OR
 
 var response = restClient.Exchanges.GetSpecificExchangeData("KRAKEN").Result;
+```
+
+### Pair info
+Get the Blockfacts pair representation of the provided exchange pair.
+- [`JObject GetPairInfo(string exchange, string pair)`](https://docs.blockfacts.io/?csharp#pair-info)
+
+```csharp
+var response = await restClient.Exchanges.GetPairInfo("BITSTAMP", "BTCUSD");
+
+// OR
+
+var response = restClient.Exchanges.GetPairInfo("BITSTAMP", "BTCUSD").Result;
 ```
 
 ### Current trade data
@@ -220,6 +259,22 @@ var response = restClient.Exchanges.GetSnapshotTradeData("BTC, ETH", "USD, GBP",
 Console.WriteLine(response["KRAKEN"]["BTC-USD"][0]["pair"]);
 ```
 
+### OHLCV Snapshot data
+Get the snapshot of provided exchange(s) OHLCV data for provided asset-denominator pairs and intervals.
+- [`JObject GetOHLCVSnapshotData(string assets, string denominators, string exchanges, string intervals)`](https://docs.blockfacts.io/?csharp#data-snapshot-ohlcv-exchange)
+
+```csharp
+var response = await restClient.Exchanges.GetOHLCVSnapshotData("BTC, ETH", "USD, GBP", "COINBASE, KRAKEN", "1m, 3m, 1h");
+
+// OR
+
+var response = restClient.Exchanges.GetOHLCVSnapshotData("BTC, ETH", "USD, GBP", "COINBASE, KRAKEN", "1m, 3m, 1h").Result;
+
+Console.WriteLine(response["KRAKEN"]["BTC-USD"]["1m"][0]["high"]);
+```
+
+**Note:** You can find all supported intervals on our official documentation here: https://docs.blockfacts.io/?csharp#data-snapshot-ohlcv-exchange
+
 ### Historical trade data
 Get exchange historical price by asset-denominator, exchange, date, time and interval.
 - [`BlockfactsHistoricalExchangeTradesModel GetHistoricalTradeData(string asset, string denominator, string exchanges, string date, string time, int interval, int page)`](https://docs.blockfacts.io/?csharp#historical-trade-data)
@@ -230,6 +285,18 @@ var response = await restClient.Exchanges.GetHistoricalTradeData("BTC", "USD", "
 // OR
 
 var response = restClient.Exchanges.GetHistoricalTradeData("BTC", "USD", "KRAKEN, COINBASE", "2.9.2019", "14:00:00", 1).Result;
+```
+
+### OHLCV Historical data
+Get historical OHLCV data by asset-denominator, exchange, date, time and interval.
+- [`JObject GetHistoricalOHLCVData(string asset, string denominator, string exchanges, string interval, string dateStart, string timeStart, string dateEnd, string timeEnd, int page)`](https://docs.blockfacts.io/?csharp#ohlcv-historical-data-2)
+
+```csharp
+var response = await restClient.Exchanges.GetHistoricalOHLCVData("BTC", "USD", "KRAKEN, COINBASE", "1d", "20.5.2020", "11:00:00", "28.5.2020", "11:00:00", 1);
+
+// OR
+
+var response = restClient.Exchanges.GetHistoricalOHLCVData("BTC", "USD", "KRAKEN, COINBASE", "1d", "20.5.2020", "11:00:00", "28.5.2020", "11:00:00", 1).Result;
 ```
 
 ### Specific trade data
@@ -244,16 +311,28 @@ var response = await restClient.Exchanges.GetSpecificTradeData("BTC", "USD", "KR
 var response = restClient.Exchanges.GetSpecificTradeData("BTC", "USD", "KRAKEN, COINBASE", "2.9.2019", "14:00:00").Result;
 ```
 
-### End of day data
-Get exchange end of day data for specific asset-denominator and exchange.
-- [`List<BlockfactsEndOfDayModel> GetEndOfDayData(string asset, string denominator, string exchange, int length)`](https://docs.blockfacts.io/?csharp#end-of-day-data-2)
+### Total trade volume
+Get historical exchange trades in specific second.
+- [`JObject GetTotalTradeVolume(string asset, string denominator, string interval)`](https://docs.blockfacts.io/?csharp#total-trade-volume)
 
 ```csharp
-var response = await restClient.Exchanges.GetEndOfDayData("BTC", "USD", "KRAKEN", 1);
+var response = await restClient.Exchanges.GetTotalTradeVolume("BTC", "USD", "1d");
 
 // OR
 
-var response = restClient.Exchanges.GetEndOfDayData("BTC", "USD", "KRAKEN", 1).Result;
+var response = restClient.Exchanges.GetTotalTradeVolume("BTC", "USD", "1d").Result;
+```
+
+### Period movers
+Get the moving percentage, and difference in price over a certain time period.
+- [`JArray GetPeriodMovers(string exchange, string denominator, string date, string interval, int sort)`](https://docs.blockfacts.io/?csharp#period-movers-2)
+
+```csharp
+var response = await restClient.Exchanges.GetPeriodMovers("KRAKEN", "USD", "11.8.2020", "sevenDay", 1);
+
+// OR
+
+var response = restClient.Exchanges.GetPeriodMovers("KRAKEN", "USD", "11.8.2020", "sevenDay", 1).Result;
 ```
 
 ## Using WebSocket API Client
